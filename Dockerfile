@@ -19,7 +19,7 @@ RUN cd /tmp && tar xzf zeromq-2.2.0.tar.gz && cd /tmp/zeromq-2.2.0 && ./configur
 
 ADD https://launchpad.net/imagemagick/main/6.8.0-4/+download/ImageMagick-6.8.0-4.tar.gz /tmp/ImageMagick-6.8.0-4.tar.gz
 RUN mkdir -p $APP_DIR/ImageMagick
-RUN cd /tmp && tar xzf /tmp/ImageMagick-6.8.0-4.tar.gz cd /tmp/ImageMagick-6.8.0-4 && ./configure --prefix $APP_DIR/ImageMagick && make && make install && cd $APP_DIR
+RUN cd /tmp && tar xzf ImageMagick-6.8.0-4.tar.gz && cd /tmp/ImageMagick-6.8.0-4 && ./configure --prefix $APP_DIR/ImageMagick && make && make install && cd $APP_DIR
 
 ENV PORT 5000
 EXPOSE 5000
