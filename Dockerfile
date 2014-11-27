@@ -10,7 +10,7 @@ RUN gem install foreman
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y build-essential uuid-dev libmysqlclient-dev git libxml2-dev libxslt1-dev libzmq-dev librsvg2-dev libmagickcore-dev
+RUN apt-get install -y build-essential uuid-dev libmysqlclient-dev git libxml2-dev libxslt1-dev libzmq-dev librsvg2-dev libmagickcore-dev swfmill
 
 ENV APP_DIR /app
 ADD http://download.zeromq.org/zeromq-2.2.0.tar.gz /tmp/zeromq-2.2.0.tar.gz
