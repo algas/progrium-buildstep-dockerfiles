@@ -1,7 +1,8 @@
 FROM debian:squeeze
 
-ADD ./build.sh /tmp/build.sh
-RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive /tmp/build.sh
+ADD ./build.sh /tmp/
+ADD ./packages.txt /tmp/
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive cd /tmp && ./build.sh
 
 ADD ./stack/configs/etc-profile /etc/profile
 
@@ -15,11 +16,12 @@ RUN gem install foreman
 
 
 ENV APP_DIR /app
-ADD ./swfmill-0.3.1.tar.gz /tmp/swfmill
-RUN mkdir -p $APP_DIR/swfmill
 RUN apt-get install -y libxml2-dev libxslt1-dev libc6-dev libfreetype6-dev libgcc1 libpng12-dev libstdc++6 zlib1g-dev xsltproc
-ADD ./xslt.h /tmp/swfmill/swfmill-0.3.1/src/xslt/xslt.h
-RUN cd /tmp/swfmill/swfmill-0.3.1 && ./configure --prefix $APP_DIR/swfmill && make && make install && cd $APP_DIR
+ADD http://swfmill.org/releases/swfmill-0.3.1.tar.gz /tmp/swfmill-0.3.1.tar.gz
+RUN mkdir -p $APP_DIR/swfmill
+RUN cd /tmp && tar xzf swfmill-0.3.1.tar.gz
+ADD ./xslt.h /tmp/swfmill-0.3.1/src/xslt/xslt.h
+RUN cd /tmp/swfmill-0.3.1 && ./configure --prefix $APP_DIR/swfmill && make && make install && cd $APP_DIR
 
 ADD http://download.zeromq.org/zeromq-2.2.0.tar.gz /tmp/zeromq-2.2.0.tar.gz
 RUN mkdir -p $APP_DIR/zeromq
